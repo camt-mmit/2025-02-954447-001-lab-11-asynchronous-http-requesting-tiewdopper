@@ -1,0 +1,70 @@
+$primary-color: #1a73e8;
+$text-main: #202124;
+$border-color: #dadce0;
+$bg-hover: #f1f3f4;
+
+:host {
+  display: block;
+  max-width: 600px;
+  margin: 40px auto; // ดันการ์ดมาตรงกลาง
+  background: white;
+  padding: 32px;
+  border-radius: 12px;
+  border: 1px solid $border-color;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+// ng-content: legend ที่ถูกส่งเข้าไป
+legend {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: $text-main;
+  margin-bottom: 24px;
+  width: 100%;
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 12px;
+}
+
+// พื้นที่ปุ่มด้านล่าง
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid $border-color;
+
+  button {
+    padding: 10px 24px;
+    border-radius: 24px; // ปุ่มทรงแคปซูล
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+
+    // ปุ่ม Save
+    &[type="submit"] {
+      background-color: $primary-color;
+      color: white;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    // ปุ่ม Cancel
+    &[type="button"] {
+      background-color: transparent;
+      color: $text-main;
+      border: 1px solid $border-color;
+
+      &:hover {
+        background-color: $bg-hover;
+      }
+    }
+  }
+}

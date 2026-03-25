@@ -1,0 +1,41 @@
+@let field = fieldTree();
+<fieldset [disabled]="field().disabled()">
+  <ng-content select="legend"></ng-content>
+  <label>
+    <b>Summary</b>
+    <input type="text" [formField]="field.summary" />
+  </label>
+
+  <label>
+    <b>description</b>
+    <textarea [formField]="field.description"></textarea>
+  </label>
+
+  <fieldset>
+    <legend>
+      <label><input type="checkbox" [formField]="field.allDay" /></label>
+    </legend>
+
+    @if (field.allDay().value()) {
+      <label>
+        <b>Start</b>
+        <input type="date" [formField]="field.start" />
+      </label>
+      <label>
+        <b>End</b>
+        <input type="date" [formField]="field.end" />
+      </label>
+    } @else {
+      <label>
+        <b>Start</b>
+        <input type="datetime-local" [formField]="field.start" />
+      </label>
+      <label>
+        <b>End</b>
+        <input type="datetime-local" [formField]="field.end" />
+      </label>
+    }
+  </fieldset>
+  <!-- ทำ protection -->
+  <ng-content></ng-content>
+</fieldset>

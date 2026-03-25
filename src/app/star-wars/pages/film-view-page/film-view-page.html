@@ -1,0 +1,10 @@
+<nav>
+  <button type="button" (click)="goback()">Back</button>
+</nav>
+@if (dataResource.hasValue()) {
+  <app-film-view [data]="dataResource.value()" [moduleRoute]="moduleRoute"></app-film-view>
+} @else if (dataResource.error(); as error) {
+  <p>{{ error.message }}</p>
+} @else if (dataResource.isLoading()) {
+  <p>Loading...</p>
+}

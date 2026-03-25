@@ -1,0 +1,185 @@
+// กำหนดตัวแปรสีเพื่อความคุมโทนง่ายขึ้น
+$primary-color: #1a73e8; // สีฟ้าสไตล์ Google
+$text-main: #202124;
+$text-muted: #5f6368;
+$border-color: #dadce0;
+$bg-hover: #f1f3f4;
+
+// จัดการ Layout หลักของ Component
+:host {
+  display: block;
+  max-width: 650px; // จำกัดความกว้างไม่ให้ยืดเต็มจอเกินไป
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ================= Header & Create Button ================= */
+.header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+
+  a {
+    text-decoration: none;
+    background-color: $primary-color;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 24px; // ปุ่มโค้งมน
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+/* ================= Search Box ================= */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 6px 8px;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  &:focus-within {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    padding: 10px 8px;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+  }
+
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &[type="button"] { // ปุ่ม X เคลียร์ค่า
+      background-color: transparent;
+      color: $text-muted;
+      padding: 8px 12px;
+      
+      &:hover {
+        background-color: $bg-hover;
+        color: #d93025;
+      }
+    }
+
+    &[type="submit"] { // ปุ่ม Search
+      background-color: $bg-hover;
+      color: $primary-color;
+      
+      &:hover {
+        background-color: darken($bg-hover, 5%);
+      }
+    }
+  }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: $border-color;
+  margin: 24px 0;
+}
+
+/* ================= Contact List ================= */
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 16px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+
+    &:hover {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      border-color: darken($border-color, 15%);
+    }
+  }
+}
+
+/* ================= Contact Item Details ================= */
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+
+  img {
+    border-radius: 50%; // ทำรูปเป็นวงกลม
+    object-fit: cover;
+    background-color: $bg-hover; // สีพื้นหลังเผื่อรูปโปร่งใส
+    border: 1px solid #eee;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+
+  strong {
+    color: $text-main;
+    font-size: 1.15rem;
+  }
+
+  .email {
+    color: $text-muted;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .phone-type {
+      color: $text-muted;
+      text-transform: capitalize; // ทำตัวแรกให้เป็นตัวใหญ่เสมอ (เช่น mobile -> Mobile)
+      font-weight: 600;
+      min-width: 50px;
+    }
+
+    .phone-value {
+      color: $text-main;
+    }
+  }
+}
+
+/* ================= Status Messages ================= */
+.error {
+  color: #d93025;
+  background-color: #fce8e6;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #fad2cf;
+  font-weight: 500;
+}

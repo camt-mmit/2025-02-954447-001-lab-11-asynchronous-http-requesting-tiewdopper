@@ -1,0 +1,10 @@
+<nav>
+  <button type="button" (click)="goback()">Back</button>
+</nav>
+@if (dataResource.hasValue()) {
+  <app-planet-view [data]="dataResource.value()" [moduleRoute]="moduleRoute"></app-planet-view>
+} @else if (dataResource.error(); as error) {
+  <p>{{ error.message }}</p>
+} @else if (dataResource.isLoading()) {
+  <p>Loading...</p>
+}

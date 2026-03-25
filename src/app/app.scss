@@ -1,0 +1,55 @@
+$primary-color: #1a73e8;
+$active-bg: #e8f0fe; // สีฟ้าอ่อนสำหรับเมนูที่ถูกเลือก
+$text-main: #202124;
+$text-muted: #5f6368;
+$border-color: #dadce0;
+
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f8f9fa; // สีพื้นหลังแอปอ่อนๆ ให้ตัดกับ Nav สีขาว
+  min-height: 100vh;
+}
+
+// แถบเมนูหลัก
+nav {
+  background-color: white;
+  border-bottom: 1px solid $border-color;
+  padding: 0 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 8px;
+    height: 64px;
+    align-items: center;
+    justify-content: center; // จัดเมนูให้อยู่กึ่งกลาง
+  }
+
+  li {
+    display: inline-flex;
+  }
+
+  a {
+    text-decoration: none;
+    color: $text-muted;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 32px; // ทรงแคปซูล
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f1f3f4;
+      color: $text-main;
+    }
+
+    // สถานะเมื่ออยู่หน้านั้นๆ (routerLinkActive)
+    &.is-active {
+      background-color: $active-bg;
+      color: $primary-color;
+    }
+  }
+}

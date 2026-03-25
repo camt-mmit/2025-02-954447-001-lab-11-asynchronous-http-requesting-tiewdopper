@@ -1,0 +1,10 @@
+<nav>
+  <button type="button" (click)="goBack()">Back</button>
+</nav>
+@if (dataResource.hasValue()) {
+  <app-person-view [data]="dataResource.value()" [moduleRoute]="moduleRoute"></app-person-view>
+} @else if (dataResource.error(); as error) {
+  <p>{{ error.message | json }}</p>
+} @else if (dataResource.isLoading()) {
+  <p>Loading...</p>
+}

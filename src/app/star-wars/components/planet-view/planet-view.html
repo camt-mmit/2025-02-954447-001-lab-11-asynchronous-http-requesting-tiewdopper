@@ -1,0 +1,70 @@
+<dl>
+  <dt>Name :</dt>
+  <dd>{{ data().name }}</dd>
+  <dt>Rotation period :</dt>
+  <dd>{{ data().rotation_period }}</dd>
+  <dt>Orbital period :</dt>
+  <dd>{{ data().orbital_period }}</dd>
+  <dt>Diameter :</dt>
+  <dd>{{ data().diameter }}</dd>
+  <dt>Climate :</dt>
+  <dd>{{ data().climate }}</dd>
+  <dt>Gravity :</dt>
+  <dd>{{ data().gravity }}</dd>
+  <dt>Terrain :</dt>
+  <dd>{{ data().terrain }}</dd>
+  <dt>Surface water :</dt>
+  <dd>{{ data().surface_water }}</dd>
+  <dt>Population :</dt>
+  @if (typeof data().population === 'number') {
+    <dd>{{ data().population | number }}</dd>
+  }
+  <dd>{{ data().population }}</dd>
+
+  <dt>Residents :</dt>
+  <dd>
+    @for (fieldTree of form.residents; track fieldTree) {
+      @let resource = fieldTree().metadata(residentResourceKey)!;
+
+      @if (resource.hasValue()) {
+        <a
+          [routerLink]="['people', resource.value().url | extractIdPipe]"
+          [relativeTo]="moduleRoute()"
+          ><span>{{ resource.value().name }}</span></a
+        ><br />
+      } @else if (resource.error(); as error) {
+        {{ error.message }}
+      } @else if (resource.isLoading()) {
+        Loading...
+      }
+    } @empty {
+      <p>No Resident</p>
+    }
+  </dd>
+
+  <dt>Films :</dt>
+  <dd>
+    @for (fieldTree of form.films; track fieldTree) {
+      @let resource = fieldTree().metadata(filmResourceKey)!;
+
+      @if (resource.hasValue()) {
+        <a
+          [routerLink]="['film', resource.value().url | extractIdPipe]"
+          [relativeTo]="moduleRoute()"
+          ><span>{{ resource.value().title }}</span></a
+        ><br />
+      } @else if (resource.error(); as error) {
+        {{ error.message }}
+      } @else if (resource.isLoading()) {
+        Loading...
+      }
+    } @empty {
+      <p>No Film</p>
+    }
+  </dd>
+  <dt>Created :</dt>
+  <dd>{{ data().created | date }}</dd>
+
+  <dt>Edited :</dt>
+  <dd>{{ data().edited | date }}</dd>
+</dl>

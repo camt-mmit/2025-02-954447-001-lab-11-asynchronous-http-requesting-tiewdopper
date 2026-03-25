@@ -1,0 +1,56 @@
+@let field = fieldTree();
+<fieldset [disabled]="field().disabled()">
+  <ng-content select="legend"></ng-content>
+
+  <label>
+    <b>Given Name*</b>
+    <input type="text" [formField]="field.givenName" />
+  </label>
+
+  <label>
+    <b>Family Name</b>
+    <input type="text" [formField]="field.familyName" />
+  </label>
+
+  <fieldset class="array-section">
+    <legend>
+      <button type="button" (click)="addEmail()">+ Email</button>
+    </legend>
+
+    @for (emailField of fieldTree().emails; track $index) {
+  <div class="row">
+    <label>
+      <b>Type*</b>
+      <input type="text" placeholder="e.g. home" [formField]="emailField.type" />
+    </label>
+    <label>
+      <b>Email*</b>
+      <input type="email" [formField]="emailField.value" />
+    </label>
+    <button type="button" class="remove-btn" (click)="removeEmail($index)">🗑️</button>
+  </div>
+}
+  </fieldset>
+
+  <fieldset class="array-section">
+    <legend>
+      <button type="button" (click)="addPhone()">+ Phone Number</button>
+    </legend>
+
+    @for (phoneField of field.phones; track $index) {
+      <div class="row">
+        <label>
+          <b>Type*</b>
+          <input type="text" placeholder="e.g. mobile" [formField]="phoneField.type" />
+        </label>
+        <label>
+          <b>Phone*</b>
+          <input type="text" [formField]="phoneField.value" />
+        </label>
+        <button type="button" class="remove-btn" (click)="removePhone($index)">🗑️</button>
+      </div>
+    }
+  </fieldset>
+
+  <ng-content></ng-content>
+</fieldset>

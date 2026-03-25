@@ -1,0 +1,130 @@
+$primary-color: #1a73e8;
+$text-main: #202124;
+$text-muted: #5f6368;
+$border-color: #dadce0;
+$bg-section: #f8f9fa; // สีเทาอ่อนสำหรับพื้นหลังกลุ่ม Array
+$danger-color: #d93025;
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &[disabled] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+// สไตล์ของ Label และ Input แบบ Default
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  b {
+    font-size: 0.9rem;
+    color: $text-muted;
+    font-weight: 500;
+  }
+
+  input {
+    padding: 12px;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: $text-main;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+}
+
+// ==========================================
+// สไตล์เฉพาะกลุ่มที่เป็น Dynamic Array
+// ==========================================
+.array-section {
+  background-color: $bg-section;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  
+  legend {
+    width: 100%;
+    margin-bottom: 16px;
+
+    // ปุ่ม + Email / + Phone Number
+    button {
+      background-color: white;
+      color: $primary-color;
+      border: 1px solid $border-color;
+      padding: 6px 16px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #e8f0fe;
+        border-color: transparent;
+      }
+    }
+  }
+}
+
+// แถวของแต่ละ Email / Phone
+.row {
+  display: flex;
+  align-items: flex-end; // ดันให้กล่อง Input อยู่ติดขอบล่างเท่ากัน
+  gap: 12px;
+  margin-bottom: 12px;
+  animation: fadeIn 0.3s ease-in-out; // แอนิเมชันเวลาถูกเพิ่มขึ้นมาใหม่
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    flex: 1; // ให้ Input ช่องหลักขยายเต็มพื้นที่ที่เหลือ
+  }
+
+  // ช่อง Type (e.g. home, mobile) ไม่ต้องกว้างมาก
+  label:first-child {
+    flex: 0.4;
+    min-width: 100px;
+  }
+
+  // ปุ่มถังขยะ
+  .remove-btn {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    width: 44px;
+    height: 44px; // ความสูงพอๆ กับ Input
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.1rem;
+
+    &:hover {
+      background-color: #fce8e6; // แดงอ่อน
+      border-color: $danger-color;
+    }
+  }
+}
+
+// แอนิเมชันเลื่อนขึ้นมาเบาๆ เวลาสร้างแถวใหม่
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

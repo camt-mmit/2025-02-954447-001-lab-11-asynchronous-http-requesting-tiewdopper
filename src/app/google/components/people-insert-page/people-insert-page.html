@@ -1,0 +1,10 @@
+<form [formRoot]="fieldTree">
+  <app-people-field-tree [fieldTree]="fieldTree">
+    <legend>Create New Contact</legend>
+
+    <div class="form-actions">
+      <button type="submit">💾 Save</button>
+      <button type="button" (click)="cancel()">❌ Cancel</button>
+    </div>
+  </app-people-field-tree>
+</form>

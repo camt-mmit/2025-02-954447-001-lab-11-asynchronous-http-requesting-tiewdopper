@@ -1,0 +1,56 @@
+<div class="header-actions">
+  <a routerLink="insert">Create Contact</a>
+</div>
+
+<form [formRoot]="form">
+  <div class="search-box">
+    <input type="text" [formField]="form.q" placeholder="Search people..." />
+    @if (form.q().value()) {
+      <button type="button" (click)="clearSearch()">X</button>
+    }
+    <button type="submit">Search</button>
+  </div>
+</form>
+
+<hr />
+
+@if (resource.isLoading()) {
+  <p>Loading contacts...</p>
+} @else if (resource.error(); as error) {
+  <p class="error">Error: {{ error.message }}</p>
+} @else {
+  @let contacts = filteredContacts();
+  
+  @if (contacts.length > 0) {
+    <ul class="contact-list">
+      @for (person of contacts; track person.resourceName) {
+        <li>
+          <div class="contact-item">
+            <img 
+            #profileImg
+            [src]="person.photos?.[0]?.url " 
+            (error)="profileImg.src = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+            alt="Profile" 
+            width="40" 
+            height="40" 
+            />
+            <div class="contact-info">
+              <strong>{{ person.names?.[0]?.displayName || 'Unknown Name' }}</strong>
+              @if (person.emailAddresses?.length) {
+                <span class="email">{{ person.emailAddresses![0].value }}</span>
+              }
+              @if(person.phoneNumbers?.length){
+                @for(phoneNumber of person.phoneNumbers; track phoneNumber.metadata?.source?.id){
+                    <p><span class="phone-type">{{phoneNumber.type}}: </span> <span class="phone-value">{{phoneNumber.value}}</span></p>
+                }
+                 
+              }
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p>Not Found</p>
+  }
+}
